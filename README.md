@@ -23,9 +23,9 @@ Deve ser utilizado a ferramenta git para versionamento.
 - [x] Create home page
 - [x] Create login page
 - [x] Create profile page
-- [ ] Create Middlewares
+- [x] Create PrismaService
+- [x] Create AuthService
+- [ ] Create Middleware
 - [ ] Create Login Method
 - [ ] Create Logout Method
 - [ ] Create Get User Info Method
-- [ ] Create PrismaService
-- [ ] Create AuthService
