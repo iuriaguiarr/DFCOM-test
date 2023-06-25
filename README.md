@@ -18,15 +18,14 @@ Deve ser utilizado a ferramenta git para versionamento.
 - [x] Install Nest.js
 - [x] Install Prisma
 - [x] Send first commit
-- [ ] Create schema
-- [ ] Send first migrate
-- [ ] Create home page
-- [ ] Create auth page
-- [ ] Create public page
-- [ ] Create private page
-- [ ] Create private page
+- [x] Create schema
+- [x] Send first migrate
+- [x] Create home page
+- [x] Create login page
+- [x] Create profile page
 - [ ] Create Middlewares
 - [ ] Create Login Method
 - [ ] Create Logout Method
 - [ ] Create Get User Info Method
+- [ ] Create PrismaService
 - [ ] Create AuthService
