@@ -3,6 +3,6 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   healthCheck(): string {
-    return 'Health Check';
+    return 'App is healthy';
   }
 }
