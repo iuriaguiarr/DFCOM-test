@@ -1,3 +1,5 @@
+import * as moment from 'moment';
+
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 
 import { JwtService } from '@nestjs/jwt';
@@ -34,7 +36,7 @@ export class AuthService {
     return {
       accessToken,
       refreshToken,
-      expiresIn: jwtConstants.expiresIn,
+      expiresIn: moment().add(jwtConstants.expiresIn, 's'),
     };
   }
 
@@ -53,7 +55,7 @@ export class AuthService {
 
     return {
       accessToken,
-      expiresIn: jwtConstants.expiresIn,
+      expiresIn: moment().add(jwtConstants.expiresIn, 's'),
     };
   }
 
