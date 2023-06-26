@@ -10,6 +10,32 @@ Devemos ter também páginas de usuário autenticado e não autenticado.
 
 Deve ser utilizado a ferramenta git para versionamento.
 
+## Utilização
+
+Para a utilização do projeto, é necessário iniciar as duas aplicações, tanto o back-end, quanto o front-end, utilizando os seguintes comandos:
+
+- Back-end
+
+```bash
+$ cd backend && npm install && npm run build && npm run start:prod
+# ou
+$ cd backend && yarn && yarn build && yarn start:prod
+```
+
+- Front-end
+
+```bash
+$ cd frontend && npm install && npm run build && npm run start
+# ou
+$ cd frontend && yarn && yarn build && yarn start
+```
+
+## Observações
+
+Por se tratar de um projeto de testes, não fez-se necessária a utilização de boas práticas de segurança, tais como: criptogratia de senhas, criptografia de variáveis de ambiente, entre outras.
+
+Também foi feita a utilização do framework ChakraUI para padronização da estilização do front-end, tornando a interface neutra para a avaliação da sua construção e funcionalidade.
+
 ## Tasks:
 
 - [x] Install Next.js
@@ -25,7 +51,7 @@ Deve ser utilizado a ferramenta git para versionamento.
 - [x] Create profile page
 - [x] Create PrismaService
 - [x] Create AuthService
-- [ ] Create Middleware
-- [ ] Create Login Method
-- [ ] Create Logout Method
-- [ ] Create Get User Info Method
+- [x] Create Middleware
+- [x] Create Login Method
+- [x] Create Logout Method
+- [x] Create Get User Info Method
