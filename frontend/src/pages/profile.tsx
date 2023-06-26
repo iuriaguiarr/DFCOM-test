@@ -8,12 +8,15 @@ import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 
 export default function Index() {
+  // Hooks
   const [cookies, setCookie, removeCookie] = useCookies();
   const [data, setData] = React.useState({ name: "", username: "", job: "" });
-
   const router = useRouter();
+  // Hooks
 
   const goToHomePage = () => router.push("/");
+
+  // Logout
   const handleLogout = async () => {
     const accessToken = cookies["accessToken"].value;
     await axios.request({
@@ -23,21 +26,26 @@ export default function Index() {
     });
     removeCookie("accessToken");
     removeCookie("refreshToken");
-    router.push("/login");
+    router.reload();
   };
+  // Logout
 
+  // Buscando dados do usuário
   React.useEffect(() => {
-    const accessToken = cookies["accessToken"].value;
-    axios
-      .request({
-        method: "GET",
-        url: "http://localhost:3001/auth/profile",
-        headers: { Authorization: `Bearer ${accessToken}` },
-      })
-      .then(({ data }) => {
-        setData({ job: data.job, name: data.name, username: data.username });
-      });
-  }, []);
+    if (cookies["accessToken"]) {
+      const accessToken = cookies["accessToken"].value;
+      axios
+        .request({
+          method: "GET",
+          url: "http://localhost:3001/auth/profile",
+          headers: { Authorization: `Bearer ${accessToken}` },
+        })
+        .then(({ data }) => {
+          setData({ job: data.job, name: data.name, username: data.username });
+        });
+    }
+  }, [cookies]);
+  // Buscando dados do usuário
 
   return (
     <>

@@ -10,12 +10,18 @@ import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 
 export default function Index() {
+  // Hooks
   const toast = useToast();
-
   const [data, setData] = React.useState({ username: "", password: "" });
   const [isInvalid, setIsInvalid] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [cookies, setCookie, removeCookie] = useCookies();
+  const router = useRouter();
+  // Hooks
+
+  // Handlers
+  const goToHomePage = () => router.push("/");
+
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, [e.target.id]: e.target.value });
   };
@@ -23,7 +29,6 @@ export default function Index() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log(cookies);
     try {
       setIsLoading(true);
       const loginResult = await axios.request({
@@ -39,7 +44,8 @@ export default function Index() {
         })
       );
       setCookie("refreshToken", loginResult.data.refreshToken);
-      router.push("/profile");
+
+      router.reload();
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -56,11 +62,7 @@ export default function Index() {
       }, 3000);
     }
   };
-
-  const router = useRouter();
-
-  const goToHomePage = () => router.push("/");
-  const goToProfilePage = () => router.push("/profile");
+  // Handlers
 
   return (
     <>
