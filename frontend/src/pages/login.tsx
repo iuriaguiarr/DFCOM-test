@@ -102,7 +102,7 @@ export default function Index() {
               label="Usuário"
               icon={User}
               id="username"
-              helperText="Padrão: admin"
+              helperText="Padrão: iuri"
               value={data.username}
               onChange={handleChangeInput}
               isInvalid={isInvalid}
@@ -114,7 +114,7 @@ export default function Index() {
               icon={Lock}
               id="password"
               type="password"
-              helperText="Padrão: admin"
+              helperText="Padrão: 1234"
               value={data.password}
               onChange={handleChangeInput}
               isInvalid={isInvalid}
