@@ -1,23 +1,14 @@
-import {
-  Button,
-  Flex,
-  Heading,
-  Text,
-  useMediaQuery,
-  useToast,
-} from "@chakra-ui/react";
+import { Button, Flex, Heading, Text } from "@chakra-ui/react";
 
 import Head from "next/head";
 import React from "react";
 import TopBar from "@/components/TopBar";
+import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 
 export default function Index() {
-  const [isSmallerThan768] = useMediaQuery("(max-width: 768px)");
-
-  const toast = useToast();
   const router = useRouter();
-
+  const [cookies, setCookie, removeCookie] = useCookies();
   const goToLoginPage = () => router.push("/login");
   const goToProfilePage = () => router.push("/profile");
 
@@ -70,7 +61,11 @@ export default function Index() {
           <Flex flexDir="column" w="full" gap="4">
             <Flex w="full" justify="space-between" align="center">
               <Heading fontSize="lg">Páginas:</Heading>
-              <Text>Você não está autenticado</Text>
+              <Text>
+                {cookies["accessToken"] && cookies["refreshToken"]
+                  ? "Você está autenticado"
+                  : "Você não está autenticado"}
+              </Text>
             </Flex>
             <Flex w="full" align="center" justify="space-between" gap="4">
               <Button onClick={goToLoginPage} width="full">

@@ -11,14 +11,20 @@ import { Icon } from "react-feather";
 
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  helperText: string;
-  isInvalid: boolean;
+  helperText?: string;
+  isInvalid?: boolean;
+  isRequired?: boolean;
+  isDisabled?: boolean;
   icon: Icon;
 }
 
 const Input = (props: IProps) => {
   return (
-    <FormControl isInvalid={props.isInvalid}>
+    <FormControl
+      isDisabled={props.isDisabled || false}
+      isRequired={props.isRequired || false}
+      isInvalid={props.isInvalid || false}
+    >
       <FormLabel>{props.label}:</FormLabel>
       <InputGroup>
         <InputLeftElement>

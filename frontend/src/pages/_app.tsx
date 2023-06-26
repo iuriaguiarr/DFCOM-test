@@ -2,11 +2,14 @@ import "../styles/globals.css";
 
 import type { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
+import { CookiesProvider } from "react-cookie";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ChakraProvider>
-      <Component {...pageProps} />
+      <CookiesProvider>
+        <Component {...pageProps} />
+      </CookiesProvider>
     </ChakraProvider>
   );
 };

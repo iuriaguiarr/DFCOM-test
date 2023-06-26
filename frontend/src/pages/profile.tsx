@@ -1,20 +1,43 @@
-import { Button, Flex, Text, useMediaQuery, useToast } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 
 import Head from "next/head";
 import React from "react";
 import TopBar from "@/components/TopBar";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 
 export default function Index() {
-  const [isSmallerThan768] = useMediaQuery("(max-width: 768px)");
+  const [cookies, setCookie, removeCookie] = useCookies();
+  const [data, setData] = React.useState({ name: "", username: "", job: "" });
 
-  const toast = useToast();
   const router = useRouter();
 
   const goToHomePage = () => router.push("/");
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    const accessToken = cookies["accessToken"].value;
+    await axios.request({
+      method: "POST",
+      url: "http://localhost:3001/auth/logout",
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    removeCookie("accessToken");
+    removeCookie("refreshToken");
     router.push("/login");
   };
+
+  React.useEffect(() => {
+    const accessToken = cookies["accessToken"].value;
+    axios
+      .request({
+        method: "GET",
+        url: "http://localhost:3001/auth/profile",
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then(({ data }) => {
+        setData({ job: data.job, name: data.name, username: data.username });
+      });
+  }, []);
 
   return (
     <>
@@ -50,10 +73,10 @@ export default function Index() {
             flexDir="column"
             gap="4"
           >
-            <Text>Usuário: </Text>
-            <Text>Nome: </Text>
-            <Text>Ocupação: </Text>
-            <Button onClick={goToHomePage} type="button">
+            <Text>Usuário: {data.username}</Text>
+            <Text>Nome: {data.name}</Text>
+            <Text>Ocupação: {data.job} </Text>
+            <Button onClick={handleLogout} type="button">
               Sair
             </Button>
           </Flex>
